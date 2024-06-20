@@ -1,0 +1,60 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CPU Scheduler</title>
+    <script>
+        function showTimeQuantumField() {
+            var type = document.getElementById('type').value;
+            var timeQuantumField = document.getElementById('timeQuantumField');
+            if (type == '4') {
+                timeQuantumField.style.display = 'block';
+            } else {
+                timeQuantumField.style.display = 'none';
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>CPU Scheduler</h1>
+    <form action="/schedule" method="POST">
+        <label for="type">Scheduler Type:</label>
+        <select id="type" name="type" onchange="showTimeQuantumField()">
+            <option value="1">FCFS</option>
+            <option value="2">SJF</option>
+            <option value="3">SRTF</option>
+            <option value="4">Round Robin</option>
+        </select>
+        <br><br>
+        <label for="n">Number of Processes:</label>
+        <input type="number" id="n" name="n" required>
+        <br><br>
+        <div id="processes">
+            
+        </div>
+        <br>
+        <div id="timeQuantumField" style="display:none;">
+            <label for="timeQuantum">Time Quantum:</label>
+            <input type="number" id="timeQuantum" name="timeQuantum">
+            <br><br>
+        </div>
+        <button type="submit">Schedule</button>
+    </form>
+    <script>
+        document.getElementById('n').addEventListener('change', function() {
+            var n = this.value;
+            var processesDiv = document.getElementById('processes');
+            processesDiv.innerHTML = '';
+            for (var i = 0; i < n; i++) {
+                processesDiv.innerHTML += `
+                    <label for="arrivalTime${i+1}">Arrival Time (P${i+1}):</label>
+                    <input type="number" id="arrivalTime${i+1}" name="arrivalTime${i+1}" required>
+                    <label for="burstTime${i+1}">Burst Time (P${i+1}):</label>
+                    <input type="number" id="burstTime${i+1}" name="burstTime${i+1}" required>
+                    <br><br>
+                `;
+            }
+        });
+    </script>
+</body>
+</html> 

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Scheduling Results</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <h1>Scheduling Results</h1>
+    <h2>Average Times</h2>
+    <p>Average Turnaround Time: {{ avg_turnaround_time }}</p>
+    <p>Average Waiting Time: {{ avg_waiting_time }}</p>
+    <p>Average Response Time: {{ avg_response_time }}</p>
+
+    <h2>Process Information</h2>
+    <table border="1">
+        <tr>
+            <th>Process</th>
+            <th>Arrival Time</th>
+            <th>Burst Time</th>
+            <th>Completion Time</th>
+            <th>Turnaround Time</th>
+            <th>Waiting Time</th>
+            <th>Response Time</th>
+        </tr>
+        {% for process in processes %}
+        <tr>
+            <td>{{ process.num }}</td>
+            <td>{{ process.arrival_time }}</td>
+            <td>{{ process.burst_time }}</td>
+            <td>{{ process.completion_time }}</td>
+            <td>{{ process.turnaround_time }}</td>
+            <td>{{ process.waiting_time }}</td>
+            <td>{{ process.response_time }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
